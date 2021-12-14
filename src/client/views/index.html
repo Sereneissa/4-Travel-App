@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> Travel App</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main> 
+    <div id="app">
+      <div class="holder headline">
+        <h1>Plan Your Next Destination </h1>
+      </div>
+
+      <form 
+          class ="search-button" 
+          onsubmit = "return Client.handlesubmit(event)"> 
+
+        <label class = "search-destination" for = "Destination"> 
+          Destination 
+        <input
+          type="text"
+          name="destination"
+          id="destination"
+          placeholder=""
+          />
+        </label>
+        Departure<label 
+          class ="departure-date"
+          for="departure-date"
+        >
+        <input
+          type="date"
+          name="departure-date"
+          id="departure-date"
+          placeholder=""
+        />
+
+        Return<label 
+          class ="return-date"
+          for="return-date"
+        >
+        <input
+          type="date"
+          name="return-date"
+          id="return-date"
+          placeholder=""
+        />
+      </label>
+
+      <input 
+         id="button-submit" 
+         type="submit" 
+         value="Search" 
+        /> 
+      </form>
+      
+      <section> 
+        <section class ="results"> 
+          <div id ="addTrip"></div>
+        </section>
+        <section class ="mytrips"> 
+            <div id = "savedtrips"></div>
+        </section>
+      </section>
+    </main> 
+    <footer> 
+      <p> Copyright Issa Inc.</p>
+    </footer>
+
+  </body>
+</html>
