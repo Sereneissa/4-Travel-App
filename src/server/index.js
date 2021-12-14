@@ -7,6 +7,8 @@ var path = require('path')
 const mockAPIResponse = require('./mockAPI.js')
 const bodyParser = require('body-parser')
 const axios = require('axios').default;
+const fetch = (url) => import('node-fetch').then(({default: fetch}) => fetch(url));
+
 
 
 const app = express()
@@ -48,18 +50,18 @@ app.get("/test", async (req,res) => {
 
 //POST request 
 app.post("/addAPI", async function (req,res) {
-  let location = req.body.text
-  let geonameData = await getGeonameData(location)
+  let formDestination = req.body.text
+  let geonameData = await getGeonameData(formDestination)
   let weatherbitData = await getWeatherData(projectData)
 
-  conseole.log(projectData)
+  console.log(projectData)
   res.send(projectData)
 
 })
 
 async function getGeonameData(formDestination) {
   const geonameUsername = `serene.issa`
-  const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&maxRows=1&username=${geonameUsername}`
+  const geonameURL = `http://api.geonames.org/searchJSON?formatted=true&q=${formDestination}&maxRows=1&username=${geonameUsername}`
   const geonameResponse = {
     method: 'POST',
     mode: 'cors',
@@ -70,7 +72,7 @@ async function getGeonameData(formDestination) {
 let response = await fetch (geonameURL, geonameResponse)
 let data = await response.json()
 
-projectData.cityName = data.geonames[0].name 
+projectData.destination = data.geonames[0].name 
 projectData.country = data.geonames[0].countryName
 projectData.latitude = data.geonames[0].lat 
 projectData.longitude = data.geonames[0].lng 
@@ -79,9 +81,10 @@ return projectData
 
 }
 
+
 async function getWeatherData(projectData) {
-  const weatherAPIKey = `29b82de2b01f4bba9f0620befefa4193`
-  const weatherbitURL = `https://api.weatherbit.io/v2.0/current?lat=${projectData.latitude}&lon=${projectData.longitude}&key=${weatherAPIKey}`
+  const weatherAPIKey = `29b82de2b01f4bba9f0620befefa4193`;
+  const weatherbitURL = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.latitude}&lon=${projectData.longitud}=${weatherAPIKey}`;
   console.log(weatherbitURL)
   const weatherBitResponse = {
     method: 'GET',
@@ -93,7 +96,7 @@ async function getWeatherData(projectData) {
   let data = await response.json()
   console.log(data)
   
-  projectData.weather = data.data[0].weather
+  //projectData.weather = data.data[0].app_temp
   return projectData
 }
 

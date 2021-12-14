@@ -1,5 +1,5 @@
 import { handleSubmit } from './js/formHandler'
-import { dateDiff } from './js/countDown'
+import { countDown } from './js/countDown'
 
 console.log(handleSubmit,);
 
@@ -13,7 +13,7 @@ import './styles/header.scss'
 
 export {
     handleSubmit,
-    dateDiff
+    countDown
    }
 
 

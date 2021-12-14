@@ -10,7 +10,7 @@ function handleSubmit(event) {
     fetch('http://localhost:3000/addAPI', {
       method:'POST',
       credentials: 'same-origin',
-      mode: 'cors',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json'
       },

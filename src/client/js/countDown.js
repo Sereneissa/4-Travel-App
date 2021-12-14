@@ -1,4 +1,4 @@
-function dateDiff() {
+function countDown() {
     let dateStart = document.getElementById('departure-date').value 
     let todayDate = new Date()
     let start = dateStart.split('-')
@@ -8,4 +8,4 @@ function dateDiff() {
     return dateDifference
 }
 
-export {dateDiff}
+export {countDown}
