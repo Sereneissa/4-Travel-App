@@ -60,8 +60,8 @@ app.post("/addAPI", async function (req,res) {
 })
 
 async function getGeonameData(formDestination) {
-  const geonameUsername = `serene.issa`
-  const geonameURL = `http://api.geonames.org/searchJSON?formatted=true&q=${formDestination}&maxRows=1&username=${geonameUsername}`
+  const geonameUsername = `sereneissa123`
+  const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&maxRows=1&username=${geonameUsername}`
   const geonameResponse = {
     method: 'POST',
     mode: 'cors',
@@ -72,19 +72,31 @@ async function getGeonameData(formDestination) {
 let response = await fetch (geonameURL, geonameResponse)
 let data = await response.json()
 
-projectData.destination = data.geonames[0].name 
-projectData.country = data.geonames[0].countryName
-projectData.latitude = data.geonames[0].lat 
-projectData.longitude = data.geonames[0].lng 
+await fetch(geonameURL)
+.then((res) => res.json())
+.then((data) => {
+    return (projectData = {
+        lat: data.geonames[0].lat,
+        lon: data.geonames[0].lng,
+    });
+});
+
+}
+/*projectData.cityName = data.geonames[0].placename;
+projectData.country = data.geonames[0].country;
+projectData.latitude = data.geonames[0].lat;
+projectData.longitude = data.geonames[0].lng;
+
+console.log(projectData)
 
 return projectData
 
-}
+}*/
 
 
 async function getWeatherData(projectData) {
   const weatherAPIKey = `29b82de2b01f4bba9f0620befefa4193`;
-  const weatherbitURL = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${projectData.latitude}&lon=${projectData.longitud}=${weatherAPIKey}`;
+  const weatherbitURL = `https://api.weatherbit.io/v2.0/forecast/daily?&key=${weatherAPIKey}`;
   console.log(weatherbitURL)
   const weatherBitResponse = {
     method: 'GET',
