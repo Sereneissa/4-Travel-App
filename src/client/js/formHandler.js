@@ -17,13 +17,12 @@ function handleSubmit(event) {
       body: JSON.stringify({text: formDestination})
     })
 
-    .then (res => res.json())
-    .then (res => {
-      console.log(res)
 
 
-})
+
+
 }
+
 
 export { handleSubmit }
 

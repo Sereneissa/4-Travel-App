@@ -47,21 +47,21 @@ app.get("/test", async (req,res) => {
 
 });
 //API storing 
-let geonamedata = {}
+let geoNameData = {}
 
 //POST request 
 app.post("/addAPI", async function (req,res) {
   let formDestination = req.body.text
   let geonameData = await getGeonameData(formDestination)
-  let weatherbitData = await getWeatherData(geonamedata)
-  console.log(geonamedata)
-  res.send(geonamedata)
+  let weatherbitData = await getWeatherData(geoNameData)
+  console.log(geoNameData)
+  res.send(geoNameData)
 
 })
 
 async function getGeonameData(formDestination) {
     const geonameUsername = `sereneissa123`
-    const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&maxRows=1&username=${geonameUsername}`
+    const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&maxRows=10&username=${geonameUsername}`
     const geonameResponse = {
       method: 'POST',
       mode: 'cors',
@@ -72,19 +72,19 @@ async function getGeonameData(formDestination) {
     let response = await fetch (geonameURL, geonameResponse)
     let data = await response.json()
 
-    geonamedata.cityName = data.geonames;
-    //geonamedata.country = data.geonames[0].country;
-    //geonamedata.latitude = data.geonames[0].lat;
-    //geonamedata.longitude = data.geonames[0].lng;
+    geoNameData.cityName = data.geonames[0].name;
+    geoNameData.country = data.geonames[0].countryName;
+    geoNameData.latitude = data.geonames[0].lat;
+    geoNameData.longitude = data.geonames[0].lng;
 
-      //console.log(data)
+      console.log(data)
       //console.log(projectData)
-      return geonamedata
+      //return geonamedata
 
 }
 
 
-async function getWeatherData(geonamedata) {
+async function getWeatherData(geoNameData) {
   const weatherAPIKey = `29b82de2b01f4bba9f0620befefa4193`;
   const weatherbitURL = `https://api.weatherbit.io/v2.0/forecast/daily?&key=${weatherAPIKey}`;
   console.log(weatherbitURL)
@@ -99,7 +99,7 @@ async function getWeatherData(geonamedata) {
   console.log(data)
   
   //projectData.weather = data.data[0].app_temp
-  return geonamedata
+  return geoNameData
 }
 
 
