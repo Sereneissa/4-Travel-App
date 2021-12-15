@@ -47,7 +47,7 @@ app.get("/test", async (req,res) => {
 
 });
 //API storing 
-let geonamedata = '';
+let geonamedata = {}
 
 //POST request 
 app.post("/addAPI", async function (req,res) {
