@@ -9,6 +9,17 @@ main {
 }
 
 section {
-    max-width: 800px;
+    max-width: 100%;
     margin: 50px auto;
+    text-align: center;
 }
+
+#countdown-clock{
+    font-family: sans-serif;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+  }
+ 
+ 

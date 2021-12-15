@@ -51,42 +51,47 @@ let geoNameData = {}
 
 //POST request 
 app.post("/addAPI", async function (req,res) {
-  let formDestination = req.body.text
+  let formDestination = req.body
   let geonameData = await getGeonameData(formDestination)
   let weatherbitData = await getWeatherData(geoNameData)
+  let pixabyData = await getPixabyData(geoNameData)
   console.log(geoNameData)
   res.send(geoNameData)
-
+  //console.log(formDestination)
 })
+
 
 async function getGeonameData(formDestination) {
     const geonameUsername = `sereneissa123`
-    const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&maxRows=10&username=${geonameUsername}`
+    const geonameURL = `http://api.geonames.org/postalCodeLookupJSON?postalcode=${formDestination}&country=USA&maxRows=20&username=sereneissa123`
     const geonameResponse = {
       method: 'POST',
       mode: 'cors',
       body:JSON.stringify(geonameURL),
       redirect: 'follow'
+
+     
+
   }
     
     let response = await fetch (geonameURL, geonameResponse)
     let data = await response.json()
 
-    geoNameData.cityName = data.geonames[0].name;
-    geoNameData.country = data.geonames[0].countryName;
-    geoNameData.latitude = data.geonames[0].lat;
-    geoNameData.longitude = data.geonames[0].lng;
+    geoNameData.cityName = data.postalcodes[0].adminName2;
+    geoNameData.country = data.postalcodes[0].countryCode;
+    geoNameData.latitude = data.postalcodes[0].lat;
+    geoNameData.longitude = data.postalcodes[0].lng;
 
-      console.log(data)
-      //console.log(projectData)
-      //return geonamedata
+    console.log(data)
+    return geoNameData
+    
+      //console.log(formDestination)
 
 }
 
-
 async function getWeatherData(geoNameData) {
   const weatherAPIKey = `29b82de2b01f4bba9f0620befefa4193`;
-  const weatherbitURL = `https://api.weatherbit.io/v2.0/forecast/daily?&key=${weatherAPIKey}`;
+  const weatherbitURL = `https://api.weatherbit.io/v2.0/current?lat=${geoNameData.latitude}&lon=${geoNameData.longitude}&key=${weatherAPIKey}&include=minutely`;
   console.log(weatherbitURL)
   const weatherBitResponse = {
     method: 'GET',
@@ -98,9 +103,30 @@ async function getWeatherData(geoNameData) {
   let data = await response.json()
   console.log(data)
   
-  //projectData.weather = data.data[0].app_temp
+  geoNameData.forecast = `${data.data[0].temp}°C`;
+
   return geoNameData
 }
+
+async function getPixabyData(geoNameData) {
+  const pixabyAPIKey = `24691018-39a9bd1f1f4754219a0859773`;
+  const pixabyURL = `https://pixabay.com/api/?key=${pixabyAPIKey}&category=travel`
+  console.log(pixabyURL)
+  const pixabyResponse = {
+    method: 'GET',
+    mode: 'cors',
+    redirect: 'follow'
+  }
+    let response  = await fetch(pixabyURL, pixabyResponse)
+    let data = await response.json()
+    console.log(data)
+
+    geoNameData.image = data.hits[0].webformatURL
+    
+
+    return geoNameData
+  }
+
 
 
 

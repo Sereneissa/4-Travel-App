@@ -1,12 +1,27 @@
 form {
-    border: 1px solid #545454;
-    border-radius: 3px;
+    border: 3px solid rgb(68, 68, 109);
+    border-radius: 10px;
     padding: 20px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    
 }
 
 input {
     padding: 5px 30px;
-    width: 100%;
-    line-height: 16px;
+    width: 50%;
+    line-height: 10px;
     margin: 10px 0;
+    text-align: center;
+}
+
+.results {
+    text-align: center;
+ 
+ }
+
+#resultsimg{
+    text-align: center;
+    align-items: center;
 }
