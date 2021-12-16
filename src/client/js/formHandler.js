@@ -4,7 +4,6 @@ function handleSubmit(event) {
 
   const formDestination = document.getElementById('destination').value
   const formDate = document.getElementById('departure-date').value
-
   console.log(formDate)
   console.log(formDestination)
 
@@ -18,6 +17,8 @@ function handleSubmit(event) {
     },
     body: JSON.stringify({text: formDestination})
   })
+
+
   .then (res => res.json())
   .then (res => {
       console.log(res);
@@ -46,11 +47,6 @@ function handleSubmit(event) {
     })
   
 }
-
-
-
-document.getElementById('button-submit').addEventListener('click', handleSubmit);
-
 
 
 export { handleSubmit }

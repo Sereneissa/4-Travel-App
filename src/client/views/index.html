@@ -52,32 +52,34 @@
       </form>
       
       <section id = "results"> 
-        <h1> My Trips</h1>
-        <h3> Date: </h3>
+        <h1 class = "results"> My Trips</h1>
+        <h3 class = "results"> Date:</h3>
         <p class = "results" id = "countdown-clock"></p>
         <div class="results" id="resultsDate"></div>
         <h3 class = "results"> Destination: </h3>
-        <div class = "results" id= "cityName">City</div> </div>
-        <div class = "results" id = "countryName">Country</div>
+        <div class = "results" id= "cityName"></div> 
+        <div class = "results" id = "countryName"></div>
         <h4 class = "results" id = "forecast"> Weather: </h4>
         <div class= "results" id = "weatherDescription"></div>
         <h4 class = "results" id = "imagePreview"> Desintation Preview:</h4>
         <img class = "results" id = "resultsimg"> 
+      
       </section> 
+
     </main> 
     <footer> 
       <p> Copyright Issa Inc.</p>
     </footer>
     
-    <script>
-      // Check that service workers are supported
-      if ('serviceWorker' in navigator) {
-          // Use the window load event to keep the page load performant
-          window.addEventListener('load', () => {
-              navigator.serviceWorker.register('/service-worker.js');
-          });
-      }
-  </script>
+<script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js');
+        });
+    }
+</script>
 
   </body>
 </html>

@@ -44,20 +44,18 @@ app.get("/test", async (req,res) => {
 
 //API storing 
 let geoNameData = {}
-let projectData = {}
 
 
 //POST request 
 app.post("/addAPI", async function (req,res) {
-  let formDestination = req.body
+  const formDestination = req.body
   let geonameData = await getGeonameData(formDestination)
   let weatherbitData = await getWeatherData(geoNameData)
   let pixabyData = await getPixabyData(geoNameData)
-  console.log(geoNameData)
+  //console.log(geoNameData)
   res.send(geoNameData)
   //console.log(formDestination)
   //res.send(formDestination)
-})
 
 
 async function getGeonameData(formDestination) {
@@ -85,6 +83,7 @@ async function getGeonameData(formDestination) {
       //console.log(formDestination)
     
 }
+
 
 async function getWeatherData(geoNameData) {
   const weatherAPIKey = `29b82de2b01f4bba9f0620befefa4193`;
@@ -126,4 +125,4 @@ async function getPixabyData(geoNameData) {
 
   } 
 
-
+})
