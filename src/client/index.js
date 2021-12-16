@@ -1,5 +1,4 @@
 import { handleSubmit } from './js/formHandler'
-import { countDownDate } from './js/countDown'
 
 console.log(handleSubmit,);
 
@@ -13,7 +12,6 @@ import './styles/header.scss'
 
 export {
     handleSubmit,
-    countDownDate
    }
 
 

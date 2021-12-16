@@ -20,19 +20,21 @@
           class ="search-button" 
           onsubmit = "return Client.handlesubmit(event)"> 
            
-        <label class = "search-destination" for = "Destination"> 
-        <input
-          type="text"
-          name="destination"
-          id="destination"
-          placeholder="Destination"
-          />
+        <label 
+        class = "search-destination" 
+        for = "destination"> 
+          <input
+            type="text"
+            name="destination"
+            id="destination"
+            placeholder="Destination" 
+            />
         </label>
+
         <label 
           class ="departure-date"
           for="departure-date"
         >
-        
         <input
           type="date"
           name="departure-date"
@@ -55,8 +57,8 @@
         <p class = "results" id = "countdown-clock"></p>
         <div class="results" id="resultsDate"></div>
         <h3 class = "results"> Destination: </h3>
-        <div class = "results" id= "cityName"></div> </div>
-        <div class = "results" id = "countryName"></div>
+        <div class = "results" id= "cityName">City</div> </div>
+        <div class = "results" id = "countryName">Country</div>
         <h4 class = "results" id = "forecast"> Weather: </h4>
         <div class= "results" id = "weatherDescription"></div>
         <h4 class = "results" id = "imagePreview"> Desintation Preview:</h4>

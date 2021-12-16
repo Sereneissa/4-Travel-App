@@ -1,6 +1,3 @@
-// Setup empty JS object to act as endpoint for all routes
-let projectData = {};
-
 // Require Express to run server and routes
 const express = require("express");
 var path = require('path')
@@ -8,8 +5,6 @@ const mockAPIResponse = require('./mockAPI.js')
 const bodyParser = require('body-parser')
 const axios = require('axios').default;
 const fetch = (url) => import('node-fetch').then(({default: fetch}) => fetch(url));
-
-
 
 const app = express()
 
@@ -28,7 +23,7 @@ const cors = require("cors");
 app.use(cors());
 
 // Setup Server
-const port = 3000;
+const port = 8081;
 
 const server = app.listen(port,listening);
 
@@ -45,9 +40,12 @@ app.get("/all", function (req,res) {
 app.get("/test", async (req,res) => {
   res.json({message:'pass!'})
 
-});
+})
+
 //API storing 
 let geoNameData = {}
+let projectData = {}
+
 
 //POST request 
 app.post("/addAPI", async function (req,res) {
@@ -58,35 +56,34 @@ app.post("/addAPI", async function (req,res) {
   console.log(geoNameData)
   res.send(geoNameData)
   //console.log(formDestination)
+  //res.send(formDestination)
 })
 
 
 async function getGeonameData(formDestination) {
     const geonameUsername = `sereneissa123`
-    const geonameURL = `http://api.geonames.org/postalCodeLookupJSON?postalcode=${formDestination}&country=USA&maxRows=20&username=sereneissa123`
+    const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&maxRows=10&username=sereneissa123`
     const geonameResponse = {
       method: 'POST',
       mode: 'cors',
       body:JSON.stringify(geonameURL),
       redirect: 'follow'
+      
+      }
+      let response = await fetch (geonameURL, geonameResponse);
+      let data = await response.json()
+      
+      console.log(data)
 
-     
+      geoNameData.cityName = data.geonames[0].toponymName;
+      geoNameData.country = data.geonames[0].countryName;
+      geoNameData.latitude = data.geonames[0].lat;
+      geoNameData.longitude = data.geonames[0].lng;
 
-  }
-    
-    let response = await fetch (geonameURL, geonameResponse)
-    let data = await response.json()
-
-    geoNameData.cityName = data.postalcodes[0].adminName2;
-    geoNameData.country = data.postalcodes[0].countryCode;
-    geoNameData.latitude = data.postalcodes[0].lat;
-    geoNameData.longitude = data.postalcodes[0].lng;
-
-    console.log(data)
-    return geoNameData
+      return geoNameData
     
       //console.log(formDestination)
-
+    
 }
 
 async function getWeatherData(geoNameData) {
@@ -97,38 +94,36 @@ async function getWeatherData(geoNameData) {
     method: 'GET',
     mode: 'cors',
     redirect: 'follow'
-  }
+    }
 
-  let response  = await fetch(weatherbitURL, weatherBitResponse)
-  let data = await response.json()
-  console.log(data)
-  
-  geoNameData.forecast = `${data.data[0].temp}°C`;
+    let response  = await fetch(weatherbitURL, weatherBitResponse)
+    let data = await response.json();
+    
+    console.log(data)
+    
+    geoNameData.forecast = `${data.data[0].temp}°C`;
 
-  return geoNameData
+    return geoNameData
 }
 
 async function getPixabyData(geoNameData) {
   const pixabyAPIKey = `24691018-39a9bd1f1f4754219a0859773`;
-  const pixabyURL = `https://pixabay.com/api/?key=${pixabyAPIKey}&category=travel`
+  const pixabyURL = `https://pixabay.com/api/?key=${pixabyAPIKey}&q=&category=travel`
   console.log(pixabyURL)
   const pixabyResponse = {
     method: 'GET',
     mode: 'cors',
     redirect: 'follow'
   }
-    let response  = await fetch(pixabyURL, pixabyResponse)
-    let data = await response.json()
-    console.log(data)
+      let response  = await fetch(pixabyURL, pixabyResponse)
+      let data = await response.json()
+      console.log(data)
 
-    geoNameData.image = data.hits[0].webformatURL
-    
+      geoNameData.image = data.hits[0].webformatURL
+      
 
-    return geoNameData
-  }
+      return geoNameData
 
-
-
-
+  } 
 
 
