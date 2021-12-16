@@ -64,7 +64,7 @@ async function getGeonameData(formDestination) {
     const geonameUsername = `sereneissa123`
     const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&maxRows=10&username=sereneissa123`
     const geonameResponse = {
-      method: 'POST',
+      method: 'GET',
       mode: 'cors',
       body:JSON.stringify(geonameURL),
       redirect: 'follow'
@@ -75,7 +75,7 @@ async function getGeonameData(formDestination) {
       
       console.log(data)
 
-      geoNameData.cityName = data.geonames[0].toponymName;
+      geoNameData.cityName = data.geonames[0].name;
       geoNameData.country = data.geonames[0].countryName;
       geoNameData.latitude = data.geonames[0].lat;
       geoNameData.longitude = data.geonames[0].lng;

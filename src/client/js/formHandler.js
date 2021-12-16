@@ -9,7 +9,7 @@ function handleSubmit(event) {
   console.log(formDestination)
 
 
-  fetch('http://localhost:3000/addAPI', {
+   fetch('http://localhost:8081/addAPI', {
     method:'POST',
     credentials: 'same-origin',
     mode: 'no-cors',
@@ -18,10 +18,9 @@ function handleSubmit(event) {
     },
     body: JSON.stringify({text: formDestination})
   })
-
   .then (res => res.json())
   .then (res => {
-      console.log(res)
+      console.log(res);
 
     const countDownClock = new Date(formDate).getTime()
     const y = setInterval(function() {
@@ -38,17 +37,20 @@ function handleSubmit(event) {
 
       }, 1000)
  
-          
+ 
       document.getElementById('resultsdate').innerHTML = formDate
       document.getElementById('cityName').innerHTML = res.cityName
       document.getElementById('countryName').innerHTML = res.country
       document.getElementById('forecast').innerHTML = res.forecast
       document.getElementById('resultsimg').src = res.image
-  })
+    })
+  
 }
 
 
- 
+
+document.getElementById('button-submit').addEventListener('click', handleSubmit);
+
 
 
 export { handleSubmit }
