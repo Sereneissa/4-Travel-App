@@ -2,8 +2,9 @@ function handleSubmit(event) {
   event.preventDefault()
 
 
-  const formDestination = document.getElementById('destination').value
-  const formDate = document.getElementById('departure-date').value
+  let formDestination = document.getElementById('destination').value
+  let formDate = document.getElementById('departure-date').value
+  
   console.log(formDate)
   console.log(formDestination)
 
@@ -39,9 +40,9 @@ function handleSubmit(event) {
       }, 1000)
  
  
-      document.getElementById('resultsdate').innerHTML = formDate
-      document.getElementById('cityName').innerHTML = res.cityName
-      document.getElementById('countryName').innerHTML = res.country
+      document.getElementById('resultsDate').innerHTML = formDate;
+      document.getElementById('cityName').innerHTML = res.cityName;
+      document.getElementById('countryName').innerHTML = res.country;
       document.getElementById('forecast').innerHTML = res.forecast
       document.getElementById('resultsimg').src = res.image
     })

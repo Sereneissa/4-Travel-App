@@ -60,7 +60,7 @@ app.post("/addAPI", async function (req,res) {
 
 async function getGeonameData(formDestination) {
     const geonameUsername = `sereneissa123`
-    const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&maxRows=10&username=sereneissa123`
+    const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&country=USA&maxRows=10&username=sereneissa123`
     const geonameResponse = {
       method: 'GET',
       mode: 'cors',
@@ -73,8 +73,8 @@ async function getGeonameData(formDestination) {
       
       console.log(data)
 
-      geoNameData.cityName = data.geonames[0].name;
-      geoNameData.country = data.geonames[0].countryName;
+      geoNameData.cityName = data.geonames[0].adminName1;
+      geoNameData.country = data.geonames[0].countryCode;
       geoNameData.latitude = data.geonames[0].lat;
       geoNameData.longitude = data.geonames[0].lng;
 
@@ -107,7 +107,7 @@ async function getWeatherData(geoNameData) {
 
 async function getPixabyData(geoNameData) {
   const pixabyAPIKey = `24691018-39a9bd1f1f4754219a0859773`;
-  const pixabyURL = `https://pixabay.com/api/?key=${pixabyAPIKey}&q=&category=travel`
+  const pixabyURL = `https://pixabay.com/api/?key=${pixabyAPIKey}&q=${geoNameData.cityName}&category=travel`
   console.log(pixabyURL)
   const pixabyResponse = {
     method: 'GET',
