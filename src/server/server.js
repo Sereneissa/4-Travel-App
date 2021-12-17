@@ -5,6 +5,8 @@ const mockAPIResponse = require('./mockAPI.js')
 const bodyParser = require('body-parser')
 const axios = require('axios').default;
 const fetch = (url) => import('node-fetch').then(({default: fetch}) => fetch(url));
+const htmlparser2 = require("htmlparser2");
+
 
 const app = express()
 
@@ -48,7 +50,7 @@ let geoNameData = {}
 
 //POST request 
 app.post("/addAPI", async function (req,res) {
-  let formDestination = req.body
+  const formDestination = req.body
   let geonameData = await getGeonameData(formDestination)
   let weatherbitData = await getWeatherData(geoNameData)
   let pixabyData = await getPixabyData(geoNameData)
@@ -101,6 +103,11 @@ async function getWeatherData(geoNameData) {
     console.log(data)
     
     geoNameData.forecast = `${data.data[0].temp}°C`;
+    geoNameData.weatherIcon = `https://www.weatherbit.io/static/img/icons/${data.data[0].weather.icon}.png`;
+    //geoNameData.description = data.data[0].weather.description;
+
+
+    
 
     return geoNameData
 }

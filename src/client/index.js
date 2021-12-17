@@ -1,5 +1,5 @@
 import { handleSubmit } from './js/formHandler'
-//import {countDown} from './js/countDown'
+import {handleUI} from './js/updateUI'
 
 console.log(handleSubmit,);
 
@@ -13,7 +13,7 @@ import './styles/header.scss'
 
 export {
     handleSubmit,
-    //countDown
+    handleUI,
    }
 
 

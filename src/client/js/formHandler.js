@@ -1,9 +1,9 @@
 const handleSubmit = (event) => {
   event.preventDefault();
 
-
-  let formDestination = document.getElementById('destination').value;
+  let formDestination = document.getElementById('destination').$broadcast;
   let formDate = document.getElementById('departure-date').value;
+
   
   console.log(formDate)
   console.log(formDestination)
@@ -39,12 +39,15 @@ const handleSubmit = (event) => {
 
       }, 1000)
  
- 
+      Client.handleUI(res);
+ /*
       document.getElementById('resultsDate').innerHTML = formDate;
       document.getElementById('cityName').innerHTML = res.cityName;
       document.getElementById('countryName').innerHTML = res.country;
-      document.getElementById('forecast').innerHTML = res.forecast
-      document.getElementById('resultsimg').src = res.image
+      document.getElementById('forecast').innerHTML = res.forecast;
+      document.getElementById('weatherIcons').src = res.weatherIcon;
+      document.getElementById('resultsimg').src = res.image;
+*/
     })
   
 }
