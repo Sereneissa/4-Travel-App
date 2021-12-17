@@ -48,11 +48,11 @@ let geoNameData = {}
 
 //POST request 
 app.post("/addAPI", async function (req,res) {
-  const formDestination = req.body
+  let formDestination = req.body
   let geonameData = await getGeonameData(formDestination)
   let weatherbitData = await getWeatherData(geoNameData)
   let pixabyData = await getPixabyData(geoNameData)
-  //console.log(geoNameData)
+  console.log(geoNameData)
   res.send(geoNameData)
   //console.log(formDestination)
   //res.send(formDestination)
@@ -60,7 +60,7 @@ app.post("/addAPI", async function (req,res) {
 
 async function getGeonameData(formDestination) {
     const geonameUsername = `sereneissa123`
-    const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&country=USA&maxRows=10&username=sereneissa123`
+    const geonameURL = `http://api.geonames.org/searchJSON?q=${formDestination}&country=USA&maxRows=1&username=sereneissa123`
     const geonameResponse = {
       method: 'GET',
       mode: 'cors',
@@ -126,3 +126,5 @@ async function getPixabyData(geoNameData) {
   } 
 
 })
+
+module.exports = app;

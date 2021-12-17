@@ -1,9 +1,9 @@
-function handleSubmit(event) {
-  event.preventDefault()
+const handleSubmit = (event) => {
+  event.preventDefault();
 
 
-  let formDestination = document.getElementById('destination').value
-  let formDate = document.getElementById('departure-date').value
+  let formDestination = document.getElementById('destination').value;
+  let formDate = document.getElementById('departure-date').value;
   
   console.log(formDate)
   console.log(formDestination)
